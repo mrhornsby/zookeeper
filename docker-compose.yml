@@ -1,0 +1,41 @@
+version: "2"
+
+networks:
+  zk:
+
+volumes:
+  zookeeper-data1:
+  zookeeper-data2:
+  zookeeper-data3:
+
+services:
+
+  zk-1:
+    image: mrhornsby/zookeeper:3.5.1-alpha
+    ports:
+      - "2181:2181"
+    volumes:
+      - zookeeper-data1:/var/opt/zookeeper
+    command: ["1", "3"]
+    networks:
+      - zk
+
+  zk-2:
+    image: mrhornsby/zookeeper:3.5.1-alpha
+    ports:
+      - "2182:2181"
+    volumes:
+      - zookeeper-data2:/var/opt/zookeeper
+    command: ["2", "3"]
+    networks:
+      - zk
+
+  zk-3:
+    image: mrhornsby/zookeeper:3.5.1-alpha
+    ports:
+      - "2183:2181"
+    volumes:
+      - zookeeper-data3:/var/opt/zookeeper
+    command: ["3", "3"]
+    networks:
+      - zk
