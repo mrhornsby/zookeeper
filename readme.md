@@ -45,4 +45,4 @@ With a single argument the script creates a single zookeeper node with *myid* se
 
 With two arguments the script creates a single zookeeper node with *myid* set tot he first argument and *zoo.conf* configured to have the number of servers specified by the second argument. The nodes are each expected to be called *zk-1*, *zk-2*, *zk-3* ...
 
-The name of the nodes can be varied by modifying the *PREFIX* argument.
+The name of the nodes can be varied by modifying the *PREFIX* environment variable.
