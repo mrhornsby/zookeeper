@@ -1,6 +1,6 @@
 # Introduction
 
-This is a [Zookeeper](https://zookeeper.apache.org) image based on the 3.5 branch (currently in alpha) that allows you to automatically configure the *myid* and *zoo.cfg* files to create standalone nodes or clusters using docker-compose.
+This is a [Zookeeper](https://zookeeper.apache.org) image based on the 3.5 branch (currently in alpha) that allows you to automatically configure the *myid* and *zoo.cfg* files to create standalone nodes or clusters.
 
 # Installation
 
@@ -18,7 +18,7 @@ Alternatively you can build the image locally:
 
 To start a single standalone zookeeper node run the following:
 
-> docker run --volume=/var/opt/zookeeper -p 2181:2181 zookeeper:latest
+> docker run --volume=/var/opt/zookeeper -p 2181:2181 mrhornsby/zookeeper:latest
 
 (**Note:** This will create a new data volume, suitable for a test, but you probably want to mount a host directory or a named volume)
 
@@ -32,17 +32,14 @@ To start a cluster of three zookeeper nodes in an ensemble use the included [doc
 
 The image only has a small set of configuration parameters.
 
-The command arguments to the image are as follows:
+With no arguments the image creates a single zookeeper node with *myid* set to 1.
 
-> Usage: bin/entrypoint.sh [myid] [node_count]
->
-> myid - the id to give this zookeeper node
-> node_count - the total number of nodes (used to build zoo.cfg)
+With a single argument the image creates a single zookeeper node with *myid* set to the first argument.
 
-With no arguments the script creates a single zookeeper node with *myid* set to 1.
+With more than one argument the script creates a single zookeeper node with *myid* set to the first argument and *zoo.conf* configured to have each of the other nodes listed e.g.
 
-With a single argument the script creates a single zookeeper node with *myid* set to the first argument.
+> docker run --volume=/var/opt/zookeeper -p 2181:2181 mrhornsby/zookeeper:latest 1 3 4 7
 
-With two arguments the script creates a single zookeeper node with *myid* set tot he first argument and *zoo.conf* configured to have the number of servers specified by the second argument. The nodes are each expected to be called *zk-1*, *zk-2*, *zk-3* ...
+would result in this server, *zk-1*, having a config pointing to servers named *zk-3*, *zk-4*, *zk-7*.
 
-The name of the nodes can be varied by modifying the *PREFIX* environment variable.
+The name of the nodes can be varied by modifying the *PREFIX* environment variable, which defaults to *zk-*.
