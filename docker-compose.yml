@@ -11,7 +11,7 @@ volumes:
 services:
 
   zk-1:
-    image: mrhornsby/zookeeper:3.5.1-alpha
+    image: mrhornsby/zookeeper:latest
     ports:
       - "2181:2181"
     volumes:
@@ -21,7 +21,7 @@ services:
       - zk
 
   zk-2:
-    image: mrhornsby/zookeeper:3.5.1-alpha
+    image: mrhornsby/zookeeper:latest
     ports:
       - "2182:2181"
     volumes:
@@ -31,7 +31,7 @@ services:
       - zk
 
   zk-3:
-    image: mrhornsby/zookeeper:3.5.1-alpha
+    image: mrhornsby/zookeeper:latest
     ports:
       - "2183:2181"
     volumes:

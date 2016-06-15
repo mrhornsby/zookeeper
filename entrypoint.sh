@@ -8,21 +8,20 @@ if [ "$#" -gt 2 ]; then
     exit 1
 fi
 
-MYID=$1
+MYID=${1-1}
 NODES=$2
 PREFIX=${PREFIX-zk-}
 
 echo "Starting zookeeper with myid=$MYID"
 
-if [ ! -f /var/opt/zookeeper/myid ]; then
-    echo $MYID > /var/opt/zookeeper/myid
-fi
+echo $MYID > /var/opt/zookeeper/myid
 
+cp conf/zoo.template.cfg
 if [ -z "$NODES" ]; then
-	echo "server.$MYID=localhost:2888:3888;2181" >> conf/zoo.cfg
+	echo "server.$MYID=localhost:2888:3888;2181" > conf/zoo.dynamic.cfg
 else
 	for i in $(seq 1 $2); do
-		echo "server.$i=$PREFIX$i:2888:3888;2181" >> conf/zoo.cfg
+		echo "server.$i=$PREFIX$i:2888:3888;2181" >> conf/zoo.dynamic.cfg
 	done
 fi
 
