@@ -1,7 +1,7 @@
 FROM java:8-jre
 MAINTAINER Mark Hornsby <docker@markhornsby.uk>
 
-ARG VERSION=3.5.1-alpha
+ARG VERSION=3.5.2-alpha
 
 LABEL name="zookeeper" version=$VERSION
 
