@@ -18,7 +18,7 @@ Alternatively you can build the image locally:
 
 To start a single standalone zookeeper node run the following:
 
-> docker run --volume=/var/opt/zookeeper -p 2181:2181 mrhornsby/zookeeper:latest
+> docker run --volume=/var/opt/zookeeper -p 2181:2181 -h zk-1 mrhornsby/zookeeper:latest
 
 (**Note:** This will create a new data volume, suitable for a test, but you probably want to mount a host directory or a named volume)
 
